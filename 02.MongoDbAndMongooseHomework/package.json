@@ -1,0 +1,14 @@
+{
+  "name": "chatdbmodule",
+  "version": "0.0.1",
+  "description": "Chat Db Module",
+  "main": "manual-test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Telerik Academy",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^4.3.4"
+  }
+}
