@@ -1,0 +1,46 @@
+extend shared/layout
+block main-content
+    .sign-up-update-form.container(style="width:700px!important")
+        if signUpErrors
+            .alert.alert-danger(role="alert") #{signUpErrors}
+        .well
+            form.form-horizontal(action="/api/identity/users" method="post")
+                fieldset
+                    legend
+                        strong Create New User
+                    .form-group
+                        label.col-md-2.control-label(for="first-name") First Name*
+                        .col-md-10
+                            input.form-control#first-name(type="text", placeholder="First Name", name="firstName", required)
+                    .form-group
+                        label.col-md-2.control-label(for="profile-picture") Profile picture
+                        .col-md-10
+                            input.form-control#profile-picture(type="url", name="profilePicture")
+                    .form-group
+                        label.col-md-2.control-label(for="last-name") Last Name*
+                        .col-md-10
+                            input.form-control#last-name(type="text", placeholder="Last Name", name="lastName", required)
+                    .form-group
+                        label.col-md-2.control-label(for="username") Username*
+                        .col-md-10
+                            input.form-control#username(type="text", placeholder="Username", name="username", required)
+                    .form-group
+                        label.col-md-2.control-label(for="email") Email*
+                        .col-md-10
+                            input.form-control#email(type="email", placeholder="Email", name="email", required)
+                    .form-group
+                        label.col-md-2.control-label(for="password") Password*
+                        .col-md-10
+                            input.form-control#password(type="password", placeholder="Password", name="password", required)
+                    .form-group
+                        label.col-md-2.control-label(for="facebookProfile") Facebook profile
+                        .col-md-10
+                            input.form-control#facebookProfile(type="url", placeholder="Facebook profile", name="facebookProfile")
+                    .form-group
+                        label.col-md-2.control-label(for="youtubeProfile") Youtube profile
+                        .col-md-10
+                            input.form-control#youtubeProfile(type="url", placeholder="Youtube profile", name="youtubeProfile")
+                    .pull-right(style="margin: 5px")
+                        button.btn.btn-primary Create
+                    .pull-right(style="margin: 5px")
+                        a.btn.btn-primary(href="/") Cancel

@@ -1,0 +1,19 @@
+extend ../shared/layout
+block main-content
+    .text-center.centered-div
+        if errors
+            .alert.alert-dismissible.alert-danger #{errors}
+        form.form-horizontal.centered-div(action="/api/playlists/#{playlist._id}/add-comment", method="post")
+            fieldset
+                legend Add comment to playlist&nbsp;
+                    strong
+                        = playlist.title
+                div.form-group
+                    label.col-lg-2.control-label(for="inputUrl") Comment
+                    div.col-lg-10
+                        input.form-control(type="text" id="inputUrl" placeholder="Comment" required name="commentText")
+                br
+                div.form-group
+                    div.col-lg-10.col-lg-offset-2
+                        a.btn.btn-primary(href="/api/playlists/#{playlist._id}" style="margin: 5px") Cancel
+                        button.btn.btn-primary(style="margin: 5px") Submit

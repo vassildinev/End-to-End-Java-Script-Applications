@@ -1,0 +1,24 @@
+.navbar-right(style="margin-right:20px")
+    if !user
+        form.navbar-form(action="/api/identity/login", method="post")
+            .form-group
+                if loginErrors
+                    .alert.alert-danger.form-group(style="line-height:20px;display:inline-block!important;padding:6px!important; margin-right:10px") #{loginErrors}
+                input.form-control(type="text", placeholder="Username", name="username")
+                input.form-control(type="password", placeholder="Password", name="password")
+            button.btn.btn-default Log In
+            a.btn.btn-default(href="/api/identity/signup") Sign Up
+
+form(action="/api/identity/logout" method="post")
+    ul.nav.navbar-nav.navbar-right
+        li.dropdown
+            if user
+                a.dropdown-toggle(style="margin-right:50px" href="", data-toggle="dropdown") #{user.firstName + ' ' + user.lastName}&nbsp;
+                    span.caret
+                    span.badge(style="background-color:#ddd!important;height:20px;line-height:14px;")
+                        = (user.rating.reduce(function(a, b) {return a + b; }, 0) / (user.rating.length == 0 ? 1 : user.rating.length)).toFixed(1)
+                ul.dropdown-menu(style="margin-right:50px")
+                    li
+                        a(href="/api/identity/profile") Profile
+                    li
+                        button Log Out

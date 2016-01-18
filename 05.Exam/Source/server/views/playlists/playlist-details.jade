@@ -1,0 +1,57 @@
+extend ../shared/layout
+block main-content
+    .text-center.centered-div
+        if !playlist.isPrivate || playlist.creator === user.username || (playlist.isPrivate && playlist.visibleTo.indexOf(user.username) > -1)
+            h2 Playlist details
+            hr
+            h1
+                strong(style="text-decoration:underline")
+                    = playlist.title
+            h2 Rating:&nbsp;
+                = (playlist.rating / (playlist.totalRatings === 0 ? 1 : playlist.totalRatings)).toFixed(1)
+            p
+                = playlist.description
+            hr
+            if playlist.creator !== user.username
+                form(action="/api/playlists/#{playlist._id}/rate" method="post")
+                    input.form-control(type="number" min="1" max="5" value="5" style="width:100px;display:inline-block;margin:5px" name="rating")
+                    button.btn.btn-info(style="margin-bottom:4px") Rate
+            if playlist.isPrivate
+                if playlist.visibleTo.length > 0
+                    h3 Editors
+                    each editor in playlist.visibleTo
+                        span #{editor}
+                        br
+                form(action="/api/playlists/#{playlist._id}/add-editor" method="post")
+                    input.form-control(type="text" style="width:100px;display:inline-block;margin:5px" name="editorUsername")
+                    button.btn.btn-info(style="margin-bottom:4px") Add editor
+            hr
+            h2 Videos
+            a.btn.btn-default(href="/api/playlists/" + playlist._id + "/add-video") Add video
+            br
+            br
+            if playlist.videoUrls.length === 0
+                h3 This playlist contains no videos yet
+
+            if playlist.videoUrls.length > 0
+                each url, index in playlist.videoUrls
+                    iframe(width="300px" height="200px" src=url)
+            hr
+            h2 Comments
+            a.btn.btn-default(href="/api/playlists/" + playlist._id + "/add-comment") Add comment
+            br
+            br
+            if playlist.comments.length === 0
+                h3 This playlist contains no comments yet
+
+            if playlist.comments.length > 0
+                each comment in playlist.comments
+                    .panel.panel-default
+                        .panel-heading By&nbsp;
+                            strong
+                                = comment.author
+                        .panel-body
+                            = comment.text
+
+        if !(!playlist.isPrivate || playlist.creator === user.username || (playlist.isPrivate && playlist.visibleTo.indexOf(user.username) > -1))
+            h3 You are not authorized to view this page

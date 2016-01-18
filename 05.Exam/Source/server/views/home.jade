@@ -1,0 +1,34 @@
+extend shared/layout
+block main-content
+    .container.text-center
+        .jumbotron
+           h1
+            strong(style="text-decoration:underline") YouTube Playlist System
+            h2 Create playlists with your favorite songs and share them with your friends!
+        table.table.table-bordered
+            thead
+                tr
+                    th.text-center(colspan=4 style="font-size:25px") Most popular public playlists
+                tr
+                    th.text-center Title
+                    th.text-center Rating
+                    th.text-center Creation date
+                    th.text-center Link
+            tbody
+                each playlist in playlists
+                    tr
+                        td
+                            = playlist.title
+                        td
+                            = (playlist.rating / (playlist.totalRatings === 0 ? 1 : playlist.totalRatings)).toFixed(1)
+                        td
+                            = playlist.creationDate.getDay() +' ' + monthNames[playlist.creationDate.getMonth()] + ' '
+                            = playlist.creationDate.getFullYear() + ' at '
+                            = playlist.creationDate.getHours() + ':' + playlist.creationDate.getMinutes() + ':' + playlist.creationDate.getSeconds()
+                        td
+                            a(href="/api/playlists/#{playlist._id}") Details
+        small
+            strong("style:text-decoration:underline") Note:
+            | &nbsp;
+            span Table is refreshed every 10 minutes
+        br

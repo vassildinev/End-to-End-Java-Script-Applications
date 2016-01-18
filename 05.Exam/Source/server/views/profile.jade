@@ -1,0 +1,56 @@
+extend shared/layout
+block main-content
+    div.text-center
+        h1
+            = user.firstName + ' ' + user.lastName
+        h2
+            = '(' + user.username + ')'
+        h2 Rating&nbsp;
+            = (user.rating.reduce(function(a, b) {return a + b; }, 0) / (user.rating.length == 0 ? 1 : user.rating.length)).toFixed(1)
+        img.profile-picture(src=user.profilePicture)
+        h3
+            = user.email
+        if user.facebookProfile && user.facebookProfile !== ''
+            h3
+                = user.facebookProfile
+        if user.youtube && user.facebookProfile !== ''
+            h3
+                = user.facebookProfile
+    .sign-up-update-form.container(style="width:700px!important")
+        .well
+            form.form-horizontal(action="/api/identity/users/update" method="post")
+                fieldset
+                    legend
+                        strong Update your profile
+                    .form-group
+                        label.col-md-2.control-label(for="first-name") First Name
+                        .col-md-10
+                            input.form-control#first-name(type="text", placeholder="First Name", name="firstName")
+                    .form-group
+                        label.col-md-2.control-label(for="profile-picture") Profile picture
+                        .col-md-10
+                            input.form-control#profile-picture(type="url", name="profilePicture")
+                    .form-group
+                        label.col-md-2.control-label(for="last-name") Last Name
+                        .col-md-10
+                            input.form-control#last-name(type="text", placeholder="Last Name", name="lastName")
+                    .form-group
+                        label.col-md-2.control-label(for="email") Email
+                        .col-md-10
+                            input.form-control#email(type="email", placeholder="Email", name="email")
+                    .form-group
+                        label.col-md-2.control-label(for="password") Password
+                        .col-md-10
+                            input.form-control#password(type="password", placeholder="Password", name="password")
+                    .form-group
+                        label.col-md-2.control-label(for="facebookProfile") Facebook profile
+                        .col-md-10
+                            input.form-control#facebookProfile(type="url", placeholder="Facebook profile", name="facebookProfile")
+                    .form-group
+                        label.col-md-2.control-label(for="youtubeProfile") Youtube profile
+                        .col-md-10
+                            input.form-control#youtubeProfile(type="url", placeholder="Youtube profile", name="youtubeProfile")
+                    .pull-right(style="margin: 5px")
+                        button.btn.btn-primary Update
+                    .pull-right(style="margin: 5px")
+                        a.btn.btn-primary(href="/") Cancel

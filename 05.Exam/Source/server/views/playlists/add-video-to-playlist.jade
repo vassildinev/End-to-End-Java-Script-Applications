@@ -1,0 +1,17 @@
+extend ../shared/layout
+block main-content
+    .text-center.centered-div
+        form.form-horizontal.centered-div(action="/api/playlists/#{playlist._id}/add-video", method="post")
+            fieldset
+                legend Add video to playlist&nbsp;
+                    strong
+                        = playlist.title
+                div.form-group
+                    label.col-lg-2.control-label(for="inputUrl") Url
+                    div.col-lg-10
+                        input.form-control(type="url" id="inputUrl" placeholder="Url" required name="url")
+                br
+                div.form-group
+                    div.col-lg-10.col-lg-offset-2
+                        a.btn.btn-primary(href="/api/playlists/#{playlist._id}" style="margin: 5px") Cancel
+                        button.btn.btn-primary(style="margin: 5px") Submit

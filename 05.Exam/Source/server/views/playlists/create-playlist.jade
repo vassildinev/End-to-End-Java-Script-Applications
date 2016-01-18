@@ -1,0 +1,30 @@
+extend ../shared/layout
+block main-content
+    form.form-horizontal.centered-div(action="/api/playlists/create", method="post")
+        fieldset
+            legend Create new playlist
+            div.form-group
+                label.col-lg-2.control-label(for="inputTitle") Title
+                div.col-lg-10
+                    input.form-control(type="text" id="inputTitle" placeholder="Title" required name="title")
+            div.form-group
+                label.col-lg-2.control-label(for="inputDescription") Description
+                div.col-lg-10
+                    textarea.form-control(id="inputDescription" placeholder="Description" rows="3" required name="description")
+                    span.help-block Place a short description of your playlist here
+            div.form-group
+                label.col-lg-2.control-label(for="select") Select category
+                div.col-lg-10
+                    select.form-control(id="select" name="category")
+                        each category in playlistCategories
+                            option
+                                = category
+            .checkbox.col-lg-offset-2
+                label
+                    input(type="checkbox" name="isPrivate")
+                    | Private
+            br
+            div.form-group
+                div.col-lg-10.col-lg-offset-2
+                    button.btn.btn-primary(type="reset" style="margin: 5px") Cancel
+                    button.btn.btn-primary(style="margin: 5px") Submit

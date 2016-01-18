@@ -1,0 +1,60 @@
+extend ../shared/layout
+block main-content
+    .text-center.centered-div
+        h1
+            strong Playlists
+        hr
+        if user
+            a.btn.btn-primary(href="/api/playlists/create") Create new playlist
+        br
+        br
+        div
+            if playlists.length === 0
+                h2 There are currently no playlists for you to view
+        form.form-horizontal(action="/api/playlists" method="get")
+            fieldset
+                legend
+                    strong Search
+                .form-group
+                    label.col-md-4.control-label(for="select") Order by
+                    .col-lg-8
+                        select.form-control(id="select" name="orderBy")
+                            option(value="rating") Rating
+                            option(value="date") Date
+                .form-group
+                    label.col-md-4.control-label(for="category") By category
+                    .col-md-8
+                        input.form-control#category(type="text", placeholder="Category", name="category")
+                .form-group
+                    label.col-md-4.control-label(for="titleOrDescription") By title or description
+                    .col-md-8
+                        input.form-control#titleOrDescription(type="text", placeholder="Title or description", name="titleOrDescription")
+                div(style="margin: 5px")
+                    button.btn.btn-primary Search
+                div(style="margin: 5px")
+                    - for(var i = 1; i <= pages; i += 1)
+                        a.btn.btn-primary(href="/api/playlists/?page=" + i)
+                            = i
+                        | &nbsp;
+    if playlists.length > 0
+        .container
+            table.table.table-bordered
+                thead
+                    tr
+                        th.text-center Title
+                        th.text-center Rating
+                        th.text-center Creation date
+                        th.text-center Link
+                tbody
+                    each playlist in playlists
+                        tr
+                            td
+                                = playlist.title
+                            td
+                                = (playlist.rating / (playlist.totalRatings === 0 ? 1 : playlist.totalRatings)).toFixed(1)
+                            td
+                                = playlist.creationDate.getDay() + ' ' + monthNames[playlist.creationDate.getMonth()] + ' '
+                                = playlist.creationDate.getFullYear() + ' at '
+                                = playlist.creationDate.getHours() + ':' + playlist.creationDate.getMinutes() + ':' + playlist.creationDate.getSeconds()
+                            td
+                                a(href="/api/playlists/#{playlist._id}") Details

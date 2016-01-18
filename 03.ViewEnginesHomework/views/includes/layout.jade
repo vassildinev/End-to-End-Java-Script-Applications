@@ -1,0 +1,27 @@
+doctype
+html
+    head
+        base(href="/")
+        title Online shop
+        link(rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css")
+        link(rel="stylesheet" href="/css/site.css")
+    body
+        header.nav.navbar-default.navbar-fixed-top
+            .container
+                .navbar-header
+                    a.navbar-brand(href="/") Shop
+                .navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href="/") Home
+                        li
+                            a(href="/smart-phones") Smart phones
+                        li
+                            a(href="/wearables") Wearables
+                        li
+                            a(href="/tablets") Tablets
+        block main-content
+        footer
+            p.text-center
+                | &copy; Telerik Academy 2016
+        include scripts
