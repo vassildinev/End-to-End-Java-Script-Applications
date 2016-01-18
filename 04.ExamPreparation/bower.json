@@ -1,0 +1,25 @@
+{
+  "name": "Test",
+  "description": "Test app",
+  "main": "server.js",
+  "author": "Telerik Academy",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-resource": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "toastr": "~2.1.2"
+  }
+}

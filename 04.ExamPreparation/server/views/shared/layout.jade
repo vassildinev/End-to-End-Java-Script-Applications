@@ -1,0 +1,50 @@
+doctype
+html
+    head
+        base(href="/")
+        title Test
+        link(rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css")
+        link(rel="stylesheet" href="/lib/toastr/toastr.css")
+        link(rel="stylesheet" href="/css/site.css")
+        link(rel="stylesheet" href="/css/pace.css")
+        link(rel="stylesheet" href="/css/theme.css")
+        link(rel="stylesheet" href="/css/kendo.default.min.css")
+        link(rel="stylesheet" href="/css/kendo.common.min.css")
+    body(ng-app="test")
+        header.navbar.navbar-default.navbar-fixed-top
+            .container-fluid
+                include ../login
+                .navbar-header
+                    button(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1").navbar-toggle.collapsed
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href="/home") CAH
+                .navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href="/home") Home
+                        if user
+                            li
+                                a(href="/games/create") Create Game
+                            li.dropdown
+                                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                                    | Cards
+                                    span.caret
+                                ul.dropdown-menu(role='menu')
+                                    li
+                                        a(href='/cards/mine') My cards
+                                    li.divider
+                                    li
+                                        a(href='/cards/create') Create
+                                    if user && user.roles.indexOf('admin') > -1
+                                        li.divider
+                                        li
+                                            a(href='/cards/pending') Pending
+        block main-content
+        footer
+            p.text-center
+                | &copy; Telerik Academy
+        include scripts
+
